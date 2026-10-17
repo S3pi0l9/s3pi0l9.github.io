@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bassel Alhasan | Web Penetration Tester</title>
+<meta name="description" content="Bassel Alhasan is a web and API penetration tester based in Damascus, Syria, with two years of SOC analyst experience. Experience, labs, write-ups and contact details.">
+<meta name="theme-color" content="#031019">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bassel Alhasan | Web Penetration Tester">
+<meta property="og:description" content="Web and API penetration tester with a SOC background. Labs, write-ups and contact.">
+<meta property="og:image" content="https://s3pi0l9.github.io/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #031019;
+  --surface: #07192a;
+  --surface-2: #0b2236;
+  --line: #15344c;
+  --text: #dce9f3;
+  --muted: #8ba3b8;
+  --cyan: #3cd5db;
+  --cyan-bright: #00e0f0;
+  --red: #ef2846;
+  --display: "Chakra Petch", "Trebuchet MS", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--cyan); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { color: var(--cyan-bright); }
+:focus-visible { outline: 2px solid var(--cyan-bright); outline-offset: 3px; border-radius: 2px; }
+
+.skip {
+  position: absolute; left: 12px; top: -60px; z-index: 100;
+  background: var(--cyan-bright); color: var(--bg); padding: 8px 14px; font-weight: 600; text-decoration: none;
+}
+.skip:focus { top: 12px; color: var(--bg); }
+
+.wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+/* ---------- navigation ---------- */
+.nav {
+  position: fixed; inset: 0 0 auto 0; z-index: 50;
+  background: rgba(3, 16, 25, .88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 60px; }
+.brand { display: flex; align-items: center; gap: 12px; color: var(--text); text-decoration: none; font-family: var(--display); font-weight: 600; font-size: 1.05rem; white-space: nowrap; }
+.brand:hover { color: var(--text); }
+.brand img { width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--line); }
+.nav ul { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; font-size: .92rem; }
+.nav ul a { color: var(--muted); text-decoration: none; padding: 6px 0; border-bottom: 2px solid transparent; }
+.nav ul a:hover { color: var(--text); }
+.nav ul a[aria-current="true"] { color: var(--text); border-bottom-color: var(--cyan-bright); }
+
+/* ---------- hero ---------- */
+.hero { position: relative; overflow: hidden; padding: 132px 0 96px; border-bottom: 1px solid var(--line); }
+.hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: .85; z-index: 0; }
+.hero::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(90deg, var(--bg) 0%, rgba(3,16,25,.94) 38%, rgba(3,16,25,.35) 62%, rgba(3,16,25,0) 85%),
+    linear-gradient(180deg, rgba(3,16,25,0) 60%, var(--bg) 100%);
+}
+.hero .wrap { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: 56px; align-items: center; }
+
+h1 { margin: 0 0 22px; font-family: var(--display); font-weight: 700; font-size: clamp(3rem, 8.4vw, 5.9rem); line-height: .98; letter-spacing: -.01em; }
+.glitch { display: block; position: relative; isolation: isolate; }
+.glitch::before, .glitch::after { content: attr(data-text); position: absolute; left: 0; top: 0; z-index: -1; pointer-events: none; }
+.glitch::before { color: var(--red); transform: translate(-3px, 1px); animation: split-a 6s ease-out infinite; }
+.glitch::after { color: var(--cyan-bright); transform: translate(3px, -1px); animation: split-b 6s ease-out infinite; }
+@keyframes split-a {
+  0%   { transform: translate(-16px, 4px); }
+  4%   { transform: translate(9px, -3px); }
+  8%   { transform: translate(-12px, 2px); }
+  12%  { transform: translate(6px, -1px); }
+  16%  { transform: translate(-3px, 1px); }
+  100% { transform: translate(-3px, 1px); }
+}
+@keyframes split-b {
+  0%   { transform: translate(16px, -4px); }
+  4%   { transform: translate(-9px, 3px); }
+  8%   { transform: translate(12px, -2px); }
+  12%  { transform: translate(-6px, 1px); }
+  16%  { transform: translate(3px, -1px); }
+  100% { transform: translate(3px, -1px); }
+}
+
+.role { margin: 0 0 20px; font-family: var(--display); font-weight: 500; font-size: clamp(1.25rem, 2.6vw, 1.7rem); color: var(--cyan); }
+.lead { margin: 0 0 32px; max-width: 34em; font-size: 1.15rem; color: var(--text); }
+.actions { display: flex; flex-wrap: wrap; gap: 14px; }
+.btn {
+  display: inline-block; padding: 12px 24px; border: 1px solid var(--line); border-radius: 4px;
+  color: var(--text); background: rgba(7,25,42,.7); text-decoration: none; font-weight: 600; font-size: .98rem;
+  transition: border-color .2s, color .2s, background .2s;
+}
+.btn:hover { border-color: var(--cyan-bright); color: var(--cyan-bright); }
+.btn.primary { background: var(--cyan-bright); border-color: var(--cyan-bright); color: var(--bg); }
+.btn.primary:hover { background: #fff; border-color: #fff; color: var(--bg); }
+
+.portrait { position: relative; margin: 0 auto; width: min(100%, 300px); justify-self: center; }
+.portrait::before, .portrait::after { content: ""; position: absolute; inset: 0; border: 2px solid; pointer-events: none; }
+.portrait::before { border-color: var(--cyan-bright); transform: translate(12px, 12px); }
+.portrait::after { border-color: var(--red); transform: translate(-7px, -7px); }
+.portrait img { position: relative; z-index: 1; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: var(--surface); }
+
+/* ---------- sections ---------- */
+.section { padding: 96px 0; border-bottom: 1px solid var(--line); }
+.section.alt { background: linear-gradient(180deg, rgba(7,25,42,.55), rgba(7,25,42,.25)); }
+.split { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 56px; }
+.split > header h2 { margin: 0 0 12px; font-family: var(--display); font-weight: 600; font-size: clamp(1.8rem, 3.2vw, 2.3rem); line-height: 1.1; }
+.split > header p { margin: 0 0 16px; color: var(--muted); font-size: .98rem; }
+
+.prose p { margin: 0 0 18px; max-width: 40em; }
+.prose p:last-child { margin-bottom: 0; }
+
+.macaw { margin: 36px 0 0; }
+.macaw img { width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover; border: 1px solid var(--line); background: var(--surface); }
+.macaw figcaption { margin-top: 10px; color: var(--muted); font-size: .92rem; }
+.facts { margin: 32px 0 0; display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); border-top: 1px solid var(--line); }
+.facts dt, .facts dd { margin: 0; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.facts dt { color: var(--muted); font-size: .95rem; }
+
+/* experience timeline */
+.timeline { list-style: none; margin: 0; padding: 0 0 0 4px; border-left: 1px solid var(--line); }
+.timeline > li { position: relative; padding: 0 0 44px 32px; }
+.timeline > li:last-child { padding-bottom: 0; }
+.timeline > li::before { content: ""; position: absolute; left: -6px; top: 9px; width: 11px; height: 11px; background: var(--bg); border: 2px solid var(--muted); }
+.timeline > li.current::before { background: var(--cyan-bright); border-color: var(--cyan-bright); box-shadow: 4px 4px 0 var(--red); }
+.when { margin: 0 0 4px; color: var(--muted); font-size: .92rem; }
+.timeline h3 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 1.4rem; line-height: 1.25; }
+.org { margin: 2px 0 14px; color: var(--cyan); font-weight: 500; }
+.timeline ul { margin: 0; padding-left: 1.15rem; max-width: 42em; }
+.timeline li li { margin-bottom: 6px; padding: 0; }
+.timeline li li::before { display: none; }
+
+/* skills */
+.rows { margin: 0; border-top: 1px solid var(--line); }
+.rows > div { display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: 24px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.rows dt { margin: 0; font-family: var(--display); font-weight: 600; font-size: 1.02rem; }
+.rows dd { margin: 0; color: var(--text); }
+.rows .soft dt, .rows .soft dd { color: var(--muted); }
+
+/* terminal */
+.stack { display: grid; gap: 28px; align-content: start; }
+.pixel { border: 1px solid var(--line); background: var(--surface); }
+.pixel img { width: 100%; height: auto; image-rendering: pixelated; }
+.terminal { border: 1px solid var(--line); background: #020b13; border-radius: 6px; overflow: hidden; }
+.term-bar { padding: 10px 18px; background: var(--surface-2); border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: .8rem; color: var(--muted); }
+.term-body { padding: 22px 22px 26px; font-family: var(--mono); font-size: .9rem; line-height: 1.7; }
+.term-body .cmd { margin: 0 0 6px; color: var(--text); }
+.term-body .cmd::before { content: "$ "; color: var(--cyan-bright); }
+.term-body ul { list-style: none; margin: 0 0 26px; padding: 0; columns: 3 12rem; column-gap: 24px; color: var(--cyan); }
+.term-body ul li { break-inside: avoid; }
+.term-body ul a { color: inherit; text-decoration-color: var(--red); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.term-body ul a:hover { color: #fff; }
+.term-body .out { margin: 0 0 26px; color: var(--muted); }
+.term-body .out b { color: var(--text); font-weight: 500; }
+.term-body .out:last-of-type { margin-bottom: 14px; }
+.term-body .cursor { display: inline-block; width: .6em; height: 1.1em; background: var(--cyan-bright); vertical-align: -.2em; }
+
+/* projects */
+.projects { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.projects li { display: grid; grid-template-columns: minmax(0, 1fr) 15rem; gap: 32px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+.projects h3 { margin: 0 0 6px; font-family: var(--display); font-weight: 600; font-size: 1.25rem; }
+.projects p { margin: 0; color: var(--muted); max-width: 36em; }
+.projects .tech { margin: 0; color: var(--cyan); font-size: .92rem; align-self: start; padding-top: 6px; }
+
+/* certifications */
+.certs { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.certs li { display: grid; grid-template-columns: minmax(0, 1fr) 9rem; gap: 20px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.certs .issuer { color: var(--muted); font-size: .92rem; text-align: right; }
+.certs a { color: var(--text); text-decoration-color: var(--cyan); }
+.certs a:hover { color: var(--cyan-bright); }
+
+/* contact */
+.mail { display: inline-block; margin: 8px 0 28px; font-family: var(--display); font-weight: 600; font-size: clamp(1.4rem, 3.6vw, 2.2rem); color: var(--text); text-decoration-color: var(--red); text-decoration-thickness: 3px; text-underline-offset: 8px; word-break: break-all; }
+.mail:hover { color: var(--cyan-bright); }
+.links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px; }
+.links a { display: inline-block; padding: 9px 18px; border: 1px solid var(--line); border-radius: 4px; color: var(--text); text-decoration: none; background: var(--surface); transition: border-color .2s, color .2s; }
+.links a:hover { border-color: var(--cyan-bright); color: var(--cyan-bright); }
+
+footer { padding: 32px 0; color: var(--muted); font-size: .9rem; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; align-items: center; }
+footer img { width: 24px; height: 24px; border-radius: 4px; display: inline-block; vertical-align: middle; margin-right: 10px; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 980px) {
+  .split { grid-template-columns: 1fr; gap: 28px; }
+  .split > header p { max-width: 36em; }
+  .pixel { max-width: 420px; }
+}
+@media (max-width: 860px) {
+  .nav .wrap { flex-wrap: wrap; height: auto; padding-top: 10px; padding-bottom: 0; gap: 4px 20px; }
+  .nav ul { width: 100%; overflow-x: auto; gap: 22px; padding-bottom: 2px; scrollbar-width: none; }
+  .nav ul::-webkit-scrollbar { display: none; }
+  .nav ul a { display: inline-block; white-space: nowrap; padding: 8px 0; }
+  html { scroll-padding-top: 100px; }
+  .hero { padding: 150px 0 72px; }
+  .hero .wrap { grid-template-columns: 1fr; gap: 56px; }
+  .portrait { justify-self: start; margin-left: 0; width: min(78%, 300px); }
+  .hero::after { background: linear-gradient(180deg, rgba(3,16,25,.55) 0%, rgba(3,16,25,.35) 50%, var(--bg) 100%); }
+  .section { padding: 72px 0; }
+  .rows > div { grid-template-columns: 1fr; gap: 4px; }
+  .projects li { grid-template-columns: 1fr; gap: 6px; }
+  .certs li { grid-template-columns: 1fr; gap: 0; }
+  .certs .issuer { text-align: left; }
+  .facts { grid-template-columns: 1fr; }
+  .facts dt { border-bottom: 0; padding-bottom: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .glitch::before, .glitch::after { animation: none; }
+  .btn, .links a { transition: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="#home"><img src="assets/logo.webp" alt="" width="32" height="32">Bassel Alhasan</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#labs">Labs</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main">
+
+  <section class="hero" id="home">
+    <img class="hero-bg" src="assets/hero-bg.webp" alt="" width="1584" height="577" fetchpriority="high">
+    <div class="wrap">
+      <div>
+        <h1 aria-label="Bassel Alhasan">
+          <span class="glitch" data-text="Bassel" aria-hidden="true">Bassel</span>
+          <span class="glitch" data-text="Alhasan" aria-hidden="true">Alhasan</span>
+        </h1>
+        <p class="role">Web penetration tester</p>
+        <p class="lead">I test web applications, APIs and internal networks, and write up what I find. Before this I spent two years in a SOC, so I know what defenders need from a report.</p>
+        <div class="actions">
+          <a class="btn primary" href="#contact">Get in touch</a>
+          <a class="btn" href="https://medium.com/@s3pi0l9" target="_blank" rel="noopener">Read my write-ups</a>
+        </div>
+      </div>
+      <figure class="portrait">
+        <img src="assets/portrait.webp" alt="Portrait of Bassel Alhasan" width="720" height="900">
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="wrap split">
+      <header>
+        <h2>About</h2>
+      </header>
+      <div>
+        <div class="prose">
+          <p>I'm a penetration tester working on web applications, APIs and internal networks. My engagements are a mix of grey-box and black-box, and I combine manual testing in Burpsuite with automated tools for coverage.</p>
+          <p>I started in security as a junior penetration tester, then spent two years as a SOC analyst monitoring systems, triaging alerts and running vulnerability and configuration assessments. That time on the defensive side shapes how I write findings: clear impact, clear fix. I also train and mentor people who are entering the field.</p>
+        </div>
+        <figure class="macaw">
+          <img src="assets/macaw.webp" alt="Flat illustration of a scarlet macaw in flight against dark swirling shapes" width="1400" height="700" loading="lazy">
+          <figcaption>Parrot OS user.</figcaption>
+        </figure>
+        <dl class="facts">
+          <dt>Based in</dt><dd>Damascus, Syria</dd>
+          <dt>Education</dt><dd>B.IT, Information Systems and Data Networks, Syrian Virtual University (2020 to 2025)</dd>
+          <dt>Focus</dt><dd>Web and API penetration testing, internal network testing</dd>
+          <dt>Email</dt><dd><a href="mailto:bassel199929@gmail.com">bassel199929@gmail.com</a></dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="experience">
+    <div class="wrap split">
+      <header>
+        <h2>Experience</h2>
+        <p>Most recent first.</p>
+      </header>
+      <ol class="timeline">
+        <li class="current">
+          <p class="when">Jul 2026 – present</p>
+          <h3>Web Penetration Tester</h3>
+          <p class="org">Confidential company</p>
+          <ul>
+            <li>Run grey-box and black-box penetration tests on web applications, APIs and internal networks across multiple engagements.</li>
+            <li>Test against the OWASP Top 10 and OWASP API Security Top 10, combining manual work in Burpsuite with Nuclei, ASTF, Akca and B4pass.</li>
+            <li>Document validated findings and deliver professional reports with remediation recommendations.</li>
+          </ul>
+        </li>
+        <li>
+          <p class="when">Jul 2024 – Jul 2026 (2 years)</p>
+          <h3>SOC Analyst</h3>
+          <p class="org">ProResources Technology</p>
+          <ul>
+            <li>Monitored systems, networks and endpoints, classified alerts and performed initial triage to identify threats.</li>
+            <li>Investigated incidents to find the cause and impact, and reported findings with mitigation recommendations.</li>
+            <li>Ran regular Security Configuration Assessments (SCA) and Vulnerability Assessments (VA), documented findings and tracked remediation.</li>
+            <li>Maintained ISO/IEC 27001 compliance through continuous improvement.</li>
+          </ul>
+        </li>
+        <li>
+          <p class="when">Sep 2023 – Jan 2024 (5 months)</p>
+          <h3>Junior Penetration Tester</h3>
+          <p class="org">X-Tech</p>
+          <ul>
+            <li>Ran security assessments and tests on systems, networks and applications to find and mitigate security risks.</li>
+            <li>Reported the vulnerabilities found in professional security reports.</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="skills">
+    <div class="wrap split">
+      <header>
+        <h2>Skills</h2>
+        <p>What I use day to day, and the defensive background behind it.</p>
+      </header>
+      <dl class="rows">
+        <div><dt>Web and API testing</dt><dd>OWASP Top 10, OWASP API Security Top 10, SQL injection, XSS, CSRF, file inclusion, grey-box and black-box testing</dd></div>
+        <div><dt>Tools</dt><dd>Burpsuite, Nuclei, ASTF (OWASP API Security Testing Framework), Akca (Dynamic Application Security Testing (DAST) scanner),Gobuster, B4pass</dd></div>
+        <div><dt>Internal testing</dt><dd>Enumeration, privilege escalation, port forwarding, misconfiguration and weak-credential analysis</dd></div>
+        <div><dt>Scripting</dt><dd>Python, Bash, PowerShell, C#, JavaScript, SQL</dd></div>
+        <div><dt>Systems and networking</dt><dd>Linux, Windows Server, virtualization, OSI model, TCP/IP, VLANs, subnetting, routing and switching</dd></div>
+        <div class="soft"><dt>Defensive background</dt><dd>SIEM, IDS/IPS, vulnerability and configuration assessment, PCRE2 regex for custom decoders, ISO/IEC 27001</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section alt" id="labs">
+    <div class="wrap split">
+      <header class="stack">
+        <div>
+          <h2>Labs and write-ups</h2>
+          <p>Machines and labs I've completed. Write-ups are on GitHub and Medium.</p>
+          <p><a href="https://github.com/S3pi0l9/Writeups" target="_blank" rel="noopener">Write-ups on GitHub</a><br>
+          <a href="https://medium.com/@s3pi0l9" target="_blank" rel="noopener">Read on Medium</a><br>
+          <a href="https://profile.hackthebox.com/profile/019c6a9f-12bc-7149-b328-5e80255dd942" target="_blank" rel="noopener">Hack The Box profile</a><br>
+          <a href="https://app.hackthebox.com/users/1673306" target="_blank" rel="noopener">Hack The Box labs</a></p>
+        </div>
+        <picture class="pixel">
+          <source media="(prefers-reduced-motion: reduce)" srcset="assets/pixel-room-poster.webp">
+          <img src="assets/pixel-room.webp" alt="Pixel art of a hooded figure at a desk surrounded by glowing monitors" width="498" height="280" loading="lazy">
+        </picture>
+      </header>
+
+      <div class="terminal" role="group" aria-label="List of completed labs">
+        <div class="term-bar">s3pi0l9@parrot: ~/labs</div>
+        <div class="term-body">
+          <p class="cmd">ls hack-the-box</p>
+          <ul>
+            <li>Archetype</li><li>Appointment</li><li>Crocodile</li><li>Dancing</li><li>Fawn</li><li>Meow</li><li>Oopsie</li>
+            <li>Redeemer</li><li>Responder</li><li>Sequel</li><li>Three</li><li>Unified</li><li>Vaccine</li>
+          </ul>
+
+          <p class="cmd">ls hackviser</p>
+          <ul>
+            <li>Arrow</li><li>File Hunter</li><li>Secure Command</li><li>Query Gate</li><li>Discover Lernaean</li><li>Bee</li><li>Venomous</li>
+          </ul>
+
+          <p class="cmd">ls vulnerable-vms pentesterlab</p>
+          <ul>
+            <li>Metasploitable 2</li><li>Matrix-Breakout 2 Morpheus</li><li>Symfonos 2</li><li>Web for Pentester I</li><li>Web for Pentester II</li>
+          </ul>
+
+          <p class="cmd">ls vulnyx</p>
+          <ul>
+            <!-- To link another write-up, wrap its name like this: <a href="https://github.com/S3pi0l9/Writeups/blob/main/FOLDER/FILE.md" target="_blank" rel="noopener">Name</a> -->
+            <li><a href="https://github.com/S3pi0l9/Writeups/blob/main/vulnyx/Network-Vulnyx.md" target="_blank" rel="noopener">Network</a></li>
+          </ul>
+
+          <p class="cmd">cat academy.txt</p>
+          <p class="out"><b>30+ labs</b> completed on PortSwigger Web Security Academy<br><b>30+ labs</b> completed on LetsDefend</p>
+
+          <span class="cursor" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="wrap split">
+      <header>
+        <h2>Projects</h2>
+        <p>Lab builds and side projects.</p>
+      </header>
+      <ul class="projects">
+        <li>
+          <div>
+            <h3>IDS detection lab</h3>
+            <p>A virtual lab that simulates attacks against vulnerable hosts to test and tune IDS signatures.</p>
+          </div>
+          <p class="tech">Snort, Suricata, CentOS, MikroTik, Metasploitable 2, Ubuntu, Windows 7, Parrot sec</p>
+        </li>
+        <li>
+          <div>
+            <h3>Network anomaly detection</h3>
+            <p>A machine learning project that detects network anomalies and potential intrusions.</p>
+          </div>
+          <p class="tech">Python, machine learning</p>
+        </li>
+        <li>
+          <div>
+            <h3>TrueNAS implementation</h3>
+            <p>RAID-Z storage with a simulated disk failure and virtualization, built for the Syrian Computer Society. <a href="https://www.facebook.com/share/v/TAcqDsLwAXDvKgAN/" target="_blank" rel="noopener">Watch the demo</a></p>
+          </div>
+          <p class="tech">TrueNAS, RAID-Z, virtualization</p>
+        </li>
+        <li>
+          <div>
+            <h3>C# and web applications</h3>
+            <p>Student and employee management console apps, the <a href="https://s3pi0l9.github.io/Zootopia/Website%20Project/" target="_blank" rel="noopener">Zootopia</a> front-end site, and a to-do app in ASP.NET Core.</p>
+          </div>
+          <p class="tech">C#, ASP.NET Core, HTML, CSS, JavaScript</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section alt" id="certifications">
+    <div class="wrap split">
+      <header>
+        <h2>Certifications</h2>
+        <p>Linked where a public certificate exists.</p>
+      </header>
+      <ul class="certs">
+        <li><span>Ethical Hacker (CEH)</span><span class="issuer">SVU-LLC</span></li>
+        <li><a href="https://app.letsdefend.io/certificate/show/c1897f08-1362-40b6-a7b1-af1db7e86a71" target="_blank" rel="noopener">Web Attack Detection and Analysis</a><span class="issuer">LetsDefend</span></li>
+        <li><a href="https://coursera.org/verify/OOGY85NWCUVT" target="_blank" rel="noopener">IBM Penetration Testing, Threat Hunting and Cryptography</a><span class="issuer">Coursera</span></li>
+        <li><a href="https://www.coursera.org/account/accomplishments/professional-cert/EAQXW8XLVYE6" target="_blank" rel="noopener">Google Cybersecurity Professional</a><span class="issuer">Coursera</span></li>
+        <li><a href="https://app.letsdefend.io/certificate/show/7a39d445-5459-4097-828e-bdda9311e028" target="_blank" rel="noopener">SIEM Engineer Career Path</a><span class="issuer">LetsDefend</span></li>
+        <li><a href="https://app.letsdefend.io/certificate/show/5a6df046-827d-45c5-997c-e89e8dede092" target="_blank" rel="noopener">SOC Analyst Learning Path</a><span class="issuer">LetsDefend</span></li>
+        <li><a href="https://app.letsdefend.io/certificate/show/6a4b60d6-5d4c-41a5-a512-e94306bd777b" target="_blank" rel="noopener">Malware Analysis Skill Path</a><span class="issuer">LetsDefend</span></li>
+        <li><a href="https://www.udemy.com/certificate/UC-b7708b4c-1a62-4dd9-95e1-20c49b9066fd/" target="_blank" rel="noopener">Information Security Fundamentals</a><span class="issuer">Udemy</span></li>
+        <li><span>Network Professional Administrator (NPA), 120 hours</span><span class="issuer">Syrian Computer Society (SCS)</span></li>
+        <li><span>CentOS Stream Administration, 75 hours</span><span class="issuer">Syrian Computer Society (SCS)</span></li>
+        <li><span>ASP.NET Core, Level 1</span><span class="issuer">SVU-LLC</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="wrap split">
+      <header>
+        <h2>Contact</h2>
+      </header>
+      <div>
+        <div class="prose">
+          <p>I'm open to new opportunities in penetration testing. For a role, a question or a collaboration, email me and I'll reply as soon as I can.</p>
+        </div>
+        <a class="mail" href="mailto:bassel199929@gmail.com">bassel199929@gmail.com</a>
+        <ul class="links">
+          <li><a href="https://www.linkedin.com/in/bassel-alhasan-57b2011a9/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/S3pi0l9" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://medium.com/@s3pi0l9" target="_blank" rel="noopener">Medium</a></li>
+          <li><a href="https://profile.hackthebox.com/profile/019c6a9f-12bc-7149-b328-5e80255dd942" target="_blank" rel="noopener">Hack The Box</a></li>
+          <li><a href="https://app.letsdefend.io/user/S3pi0l9" target="_blank" rel="noopener">LetsDefend</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0"><img src="assets/logo.webp" alt="" width="24" height="24">&copy; 2026 Bassel Alhasan</p>
+    <p style="margin:0">Damascus, Syria</p>
+  </div>
+</footer>
+
+<script>
+  // Highlight the nav link for the section currently in view
+  (function () {
+    var links = document.querySelectorAll('.nav ul a');
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var sections = Object.keys(map).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        links.forEach(function (a) { a.removeAttribute('aria-current'); });
+        map[e.target.id].setAttribute('aria-current', 'true');
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach(function (s) { io.observe(s); });
+  })();
+</script>
+</body>
+</html>
